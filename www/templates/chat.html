@@ -1,5 +1,4 @@
 <ion-view title="Chat" id="chat" style="background-color:#54CAFC;" class=" ">
-    <ion-content padding="true" style="background: url(img/f3gUKPiGSha0R1GrvajO_final%2520ducks_bg.png) no-repeat center;background-size:cover;" class="has-header">
 
       <ul>
         <li ng-repeat="message in vm.messages" >
@@ -8,17 +7,6 @@
       </ul>
 
     </ion-content>
-
-    <!-- <div class="list light-grey bottommsg">
-		<div class="item item-input-inset light-grey">
-		  <label  class="item-input-wrapper line-light-grey nopadtop">
-		    <input class="line-light-grey" ng-change="chatCtrl.updateTyping()" type="text"  placeholder="Message" ng-enter="chatCtrl.sendMessage()" ng-model="chatCtrl.message">
-		  </label>
-		  <div class="divsend">
-			    <button class="button button-clear ion-android-send iconsend" ng-click="chatCtrl.sendMessage()"></button>
-		  </div>
-		</div>
-	</div> -->
 
   <ion-footer-bar keyboard-attach class="bar-stable item-input-inset">
       <label class="item-input-wrapper">
