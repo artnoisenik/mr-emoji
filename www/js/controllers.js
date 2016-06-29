@@ -1,6 +1,6 @@
 angular.module('app.controllers', [])
 
-.controller('chatCtrl', function($ionicScrollDelegate,$sanitize) {
+.controller('chatCtrl', function($ionicScrollDelegate,$sanitize,responseFactory) {
   var vm=this;
 
 	vm.messages=[];
@@ -21,6 +21,7 @@ angular.module('app.controllers', [])
 
   function botMessageToList() {
     console.log('Hey this is a bot message!');
+    console.log(responseFactory());
   }
 
 })
