@@ -1,12 +1,12 @@
 <ion-view title="Chat" id="chat" style="background-color:#54CAFC;" class=" ">
+  <ion-content>
+    <ul>
+      <li ng-repeat="message in vm.messages" >
+        {{message.content}}
+      </li>
+    </ul>
 
-      <ul>
-        <li ng-repeat="message in vm.messages" >
-          {{message.content}}
-        </li>
-      </ul>
-
-    </ion-content>
+  </ion-content>
 
   <ion-footer-bar keyboard-attach class="bar-stable item-input-inset">
       <label class="item-input-wrapper">
