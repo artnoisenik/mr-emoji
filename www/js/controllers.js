@@ -1,7 +1,6 @@
 angular.module('app.controllers', [])
 
 .controller('chatCtrl', function($ionicScrollDelegate,$sanitize,responseFactory) {
-  console.log('BAnananaerrrrs!');
   var chatLog = [];
   var vm=this;
 
