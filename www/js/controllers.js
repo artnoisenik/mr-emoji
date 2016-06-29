@@ -6,8 +6,6 @@ angular.module('app.controllers', [])
 	vm.messages=[];
 
   vm.sendMessage=function(){
-    console.log('HEYYY!!!');
-    console.log('vm MESSAGE!!!!',vm.message);
     addMessageToList(vm.message);
     vm.message = "";
   };
@@ -17,11 +15,11 @@ angular.module('app.controllers', [])
     $ionicScrollDelegate.scrollBottom();
     botMessageToList();
   }
-  console.log('MESSAGES!!!!!***',vm.messages);
 
   function botMessageToList() {
-    console.log('Hey this is a bot message!');
-    console.log(responseFactory());
+    let botMessage = responseFactory();
+    console.log('Hey this is a bot message!',botMessage);
+    vm.messages.push({content:$sanitize(botMessage)});
   }
 
 })
