@@ -1,6 +1,10 @@
+#Rubbe Duck bot app
 
-![chat view](screencaps/chat.png)
-![diary view](screencaps/diary.png)
+###chat view
+![chat view](screencaps/chat.png =250x)
+
+###diary view
+![diary view](screencaps/diary.png =250x)
 
 Ionic App Base
 =====================
