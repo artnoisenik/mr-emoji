@@ -1,4 +1,4 @@
-#Rubbe Duck bot app
+#Rubber Duck bot app
 
 ###chat view
 <img src="./screencaps/chat.png" width="250x") />
