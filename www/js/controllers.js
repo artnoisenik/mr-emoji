@@ -2,6 +2,7 @@ angular.module('app.controllers', [])
 
 .controller('chatCtrl', function($ionicScrollDelegate,$sanitize,responseFactory) {
   console.log('BAnananaerrrrs!');
+  var chatLog = [];
   var vm=this;
 
 	vm.messages=[];
@@ -12,15 +13,23 @@ angular.module('app.controllers', [])
   };
 
   function addMessageToList(message){
+    var time = new Date();
+
     vm.messages.push({content:$sanitize(message)});
+    chatLog.push({timestamp: time,sender:'user',content:$sanitize(message)});
     $ionicScrollDelegate.scrollBottom();
     botMessageToList();
   }
 
   function botMessageToList() {
+    var time = new Date();
     var botMessage = responseFactory();
+
     vm.messages.push({content:$sanitize(botMessage)});
+    chatLog.push({timestamp: time,sender:'bot',content:$sanitize(botMessage)});
+    console.log('CHATTTYBOT',chatLog);
   }
+
 
 })
 
