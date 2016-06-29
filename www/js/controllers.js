@@ -15,8 +15,13 @@ angular.module('app.controllers', [])
   function addMessageToList(message){
     vm.messages.push({content:$sanitize(message)});
     $ionicScrollDelegate.scrollBottom();
+    botMessageToList();
   }
-  console.log('MESSAGESGDG!!!!!***',vm.messages);
+  console.log('MESSAGES!!!!!***',vm.messages);
+
+  function botMessageToList() {
+    console.log('Hey this is a bot message!');
+  }
 
 })
 
