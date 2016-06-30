@@ -1,6 +1,6 @@
 angular.module('app.controllers', [])
 
-.controller('chatCtrl', function($ionicScrollDelegate,$sanitize,responseFactory,$sce) {
+.controller('chatCtrl', function($ionicScrollDelegate,responseFactory,$sce) {
   var vm=this;
 
 	vm.messages=[];
@@ -11,9 +11,7 @@ angular.module('app.controllers', [])
   };
 
   function addMessageToList(message){
-    var time = new Date();
-
-    vm.messages.push({content:(message)});
+    vm.messages.push({content:$sce.trustAsHtml(message)});
     botMessageToList();
   }
 
