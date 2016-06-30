@@ -11,7 +11,7 @@
 
   <ion-footer-bar class="bar-stable item-input-inset">
       <label class="item-input-wrapper">
-        <input type="text" placeholder="Message..." ng-enter="vm.sendMessage()" ng-model="vm.message">
+        <input type="text" placeholder="Message..." ng-enter="vm.sendMessage()" ng-model="vm.message" constant-focus id="myInputField" type="hidden">
       </label>
 
       <button class="button iconsend" ng-click="vm.sendMessage()">Send</button>

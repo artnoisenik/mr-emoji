@@ -3,6 +3,11 @@ angular.module('app.controllers', [])
 .controller('chatCtrl', function($ionicScrollDelegate,responseFactory,$sce) {
   var vm=this;
 
+  // var first = document.querySelectorAll('#myInputField')[0];
+  //   if (first) {
+  //     first.focus();
+  //   }
+
 	vm.messages=[];
 
   vm.sendMessage=function(){
