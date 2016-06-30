@@ -22,6 +22,7 @@ angular.module('app.controllers', [])
     var botMessage = responseFactory();
     console.log(botMessage);
     vm.messages.push({content:$sanitize(botMessage.saying), emoji:$sce.trustAsHtml(botMessage.emoji)});
+    $ionicScrollDelegate.scrollBottom(true)
   }
 
 
