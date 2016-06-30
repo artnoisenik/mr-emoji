@@ -13,7 +13,7 @@ angular.module('app.controllers', [])
   function addMessageToList(message){
     var time = new Date();
 
-    vm.messages.push({content:$sanitize(message)});
+    vm.messages.push({content:(message)});
     botMessageToList();
   }
 
@@ -21,7 +21,7 @@ angular.module('app.controllers', [])
     var time = new Date();
     var botMessage = responseFactory();
     console.log(botMessage);
-    vm.messages.push({content:$sanitize(botMessage.saying), emoji:$sce.trustAsHtml(botMessage.emoji)});
+    vm.messages.push({content:(botMessage.saying), emoji:$sce.trustAsHtml(botMessage.emoji)});
     $ionicScrollDelegate.scrollBottom(true)
   }
 
