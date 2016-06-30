@@ -8,14 +8,14 @@
       </li>
     </ol>
 
+  </ion-content>
 
-
-  <ion-footer-bar keyboard-attach class="bar-stable item-input-inset">
+  <ion-footer-bar keyboard-attach keyboard-attach class="bar-stable item-input-inset">
       <label class="item-input-wrapper">
         <input type="text" placeholder="Message..." ng-enter="vm.sendMessage()" ng-model="vm.message">
       </label>
 
       <button class="button iconsend" ng-click="vm.sendMessage()">Send</button>
   </ion-footer-bar>
-  </ion-content>
+
 </ion-view>
