@@ -1,18 +1,18 @@
-<ion-view title="Chat" id="chat" style="background-color:#54CAFC;" class=" ">
-  <ion-content>
-    <ul>
-      <li ng-repeat="message in vm.messages" >
-        {{message.content}}
+<ion-view title="Mr. Emoji" id="chat" style="background-color:rgba(7,0,79,0.73);" class=" ">
+  <ion-content class="padding" start-y="120">
+    <ol class="messages">
+      <li ng-repeat="message in vm.messages">
+        <p>
+          {{message.content}} <i ng-bind-html="message.emoji"></i>
+        </p>
       </li>
-    </ul>
+    </ol>
 
   </ion-content>
 
   <ion-footer-bar keyboard-attach class="bar-stable item-input-inset">
       <label class="item-input-wrapper">
-
-        <span class="input-label">Chat</span>
-        <input type="text" placeholder="BANANANAS!!!!" ng-enter="vm.sendMessage()" ng-model="vm.message">
+        <input type="text" placeholder="Message..." ng-enter="vm.sendMessage()" ng-model="vm.message">
       </label>
 
       <button class="button iconsend" ng-click="vm.sendMessage()">Send</button>

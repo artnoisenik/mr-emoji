@@ -1,4 +1,12 @@
 {
   "name": "rd_bot",
-  "app_id": "a19c52b7"
+  "app_id": "a19c52b7",
+  "gulpStartupTasks": [
+    "sass",
+    "watch"
+  ],
+  "watchPatterns": [
+    "www/**/*",
+    "!www/lib/**/*"
+  ]
 }

@@ -2,7 +2,10 @@ angular.module('app.services', [])
 
 .factory('responseFactory', [function(){
   var test = function() {
-    var cool = 'Tell me more.';
+    var cool = {
+      saying: "tell me more",
+      emoji: "&#x1F914;"
+    }
     return cool;
   }
 
