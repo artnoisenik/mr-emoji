@@ -26,6 +26,6 @@
 }
 
 .messages li:nth-child(even) p {
-	background:black;
+	background:rgba(0,0,0,0.54);
   float: left;
 }
