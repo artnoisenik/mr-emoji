@@ -47,8 +47,6 @@ angular.module('app.services', [])
 
 .service('byeService', [function(){
 
-  console.log('BOOOM');
-
   var botByes = [
     {
       saying: "Later.",

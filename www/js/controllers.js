@@ -5,6 +5,8 @@ angular.module('app.controllers', [])
 
 	vm.messages=[];
 
+  var firstMessage = 0;
+
   //user sends message
 
   vm.sendMessage=function(){
@@ -61,6 +63,12 @@ angular.module('app.controllers', [])
 
     for (var i=0; i<parts.length; i++) {
       var part=parts[i];
+      if(part==='') {
+        break;
+      } else {
+        part = parts[i];
+      }
+      console.log('PPARRT',part);
       var lastPart = parts[parts.length-1];
         for (var q=0; q<botStarts.length; q++) {
           var lastBotStart = botStarts[botStarts.length-1];
@@ -79,6 +87,7 @@ angular.module('app.controllers', [])
             botMessageToList(bye);
             break;
           } else if(lastPart!=lastBotStart && greetings === false) {
+            firstMessage++;
             botMessageToList();
             break;
           }
@@ -89,7 +98,7 @@ angular.module('app.controllers', [])
 
   function botHello() {
     console.log('COUNT',countHi);
-    if(countHi===0) {
+    if(countHi===0 && firstMessage===0) {
       countHi++;
       var hi = helloService();
       return hi;
@@ -104,7 +113,7 @@ angular.module('app.controllers', [])
   }
 
   function botBye() {
-    if(countBye===0){
+    if(countBye===0 && firstMessage===0){
       countBye++;
       var bye = byeService();
       return bye;
@@ -121,13 +130,14 @@ angular.module('app.controllers', [])
   //bot posts to message list
 
   function botMessageToList(greeting) {
-
-    console.log('GREETOMG',greeting);
+    console.log('GREETING',greeting);
 
     if (greeting) {
       vm.messages.push({content:(greeting.saying), emoji:$sce.trustAsHtml(greeting.emoji),class:'bot'});
       $ionicScrollDelegate.scrollBottom(true)
     } else {
+      console.log('COOOL');
+
       var botMessage = responseFactory();
 
       vm.messages.push({content:(botMessage.saying), emoji:$sce.trustAsHtml(botMessage.emoji),class:'bot'});
