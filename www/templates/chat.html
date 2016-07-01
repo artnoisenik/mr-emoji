@@ -8,7 +8,7 @@
 
     <ol class="messages list">
       <li ng-repeat="message in vm.messages">
-        <p>
+        <p class="{{message.class}}">
           {{message.content}} <i ng-bind-html="message.emoji"></i>
         </p>
       </li>

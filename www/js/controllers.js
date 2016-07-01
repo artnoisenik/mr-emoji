@@ -1,106 +1,117 @@
 angular.module('app.controllers', [])
 
-.controller('chatCtrl', function($ionicScrollDelegate,responseFactory,$sce) {
+.controller('chatCtrl', function($ionicScrollDelegate,responseFactory,helloService,byeService,$sce) {
   var vm=this;
 
 	vm.messages=[];
+
+  //user sends message
 
   vm.sendMessage=function(){
     addMessageToList(vm.message);
     vm.message = "";
   };
 
+  //sends user message to list
+
   function addMessageToList(message){
-    vm.messages.push({content:$sce.trustAsHtml(message)});
-    // botMessageToList();
-    reviewMessage(message);
+    vm.messages.push({content:$sce.trustAsHtml(message),class:'user'});
+    $ionicScrollDelegate.scrollBottom(true);
+    reviewMessageHello(message);
+    // reviewMessageBye(message);
   }
 
-  var elizaQuits = [
+  //bot says hello
+
+  var botStarts = [
     "hi",
     "yo",
     "hello",
     "hey",
-    "what's up",
     "howdy",
+    "aloha",
   ];
 
-  function reviewMessage(text) {
-    text=text.toLowerCase();
-  	text=text.replace(/@#\$%\^&\*\(\)_\+=~`\{\[\}\]\|:;<>\/\\\t/g, ' ');
-  	text=text.replace(/\s+-+\s+/g, '.');
-  	text=text.replace(/\s*[,\.\?!;]+\s*/g, '.');
-  	text=text.replace(/\s*\bbut\b\s*/g, '.');
-  	text=text.replace(/\s{2,}/g, ' ');
+  var botEnds = [
+    "bye",
+    "later",
+    "see ya",
+    "good bye",
+    "gotta go",
+    "gtg",
+    "gottago",
+    "quit",
+    "end",
+  ];
 
-    // console.log(text);
+  function reviewMessageHello(text) {
+    var greetings = false;
+
+    text=text.toLowerCase();
+    text=text.replace(/@#\$%\^&\*\(\)_\+=~`\{\[\}\]\|:;<>\/\\\t/g, ' ');
+    text=text.replace(/\s+-+\s+/g, '.');
+    text=text.replace(/\s*[,\.\?!;]+\s*/g, '.');
+    text=text.replace(/\s*\bbut\b\s*/g, '.');
+    text=text.replace(/\s{2,}/g, ' ');
 
     var parts=text.split('.').join(' ').split(' ');
-    console.log(parts);
+
     for (var i=0; i<parts.length; i++) {
       var part=parts[i];
-      // console.log(part);
-      if (part!='') {
-        // check for quit expression
-        for (var q=0; q<elizaQuits.length; q++) {
-          if (elizaQuits[q]==part) {
-            var hi = getFinal();
-            vm.messages.push({content:(hi.saying), emoji:$sce.trustAsHtml(hi.emoji)});
-            $ionicScrollDelegate.scrollBottom(true)
+      var lastPart = parts[parts.length-1];
+        for (var q=0; q<botStarts.length; q++) {
+          var lastBotStart = botStarts[botStarts.length-1];
+          if (botStarts[q]==part) {
+            greetings = true;
+            var hello = botHello();
+            botMessageToList(hello);
+            break;
           }
         }
-      }
+
+        for (var z=0; z<botEnds.length; z++) {
+          if (botEnds[z]==part) {
+            greetings = true;
+            var bye = botBye();
+            botMessageToList(bye);
+            break;
+          } else if(lastPart!=lastBotStart && greetings === false) {
+            botMessageToList();
+            break;
+          }
+        }
+
     }
   }
 
-  var elizaFinals = [
-    {
-      saying: "Hey.",
-      emoji: "&#128515;"
-    },
-    {
-      saying: "",
-      emoji: "&#128521;"
-    },
-    {
-      saying: "Yo.",
-      emoji: "&#128526;"
-    },
-    {
-      saying: "",
-      emoji: "&#128540;"
-    },
-    {
-      saying: "Hello...",
-      emoji: "&#128524;"
-    },
-  ];
-
-  var getFinal = function() {
-  	return elizaFinals[Math.floor(Math.random()*elizaFinals.length)];
+  function botHello() {
+    var hi = helloService();
+    console.log("HI",hi);
+    return hi;
   }
 
-
-
-  function botMessageToList() {
-    var time = new Date();
-    var botMessage = responseFactory();
-    vm.messages.push({content:(botMessage.saying), emoji:$sce.trustAsHtml(botMessage.emoji)});
-    $ionicScrollDelegate.scrollBottom(true)
+  function botBye() {
+    var bye = byeService();
+    return bye;
   }
 
+  //bot posts to message list
 
-})
+  function botMessageToList(greeting) {
 
+    console.log('GREETOMG',greeting);
 
-.controller('diaryCtrl', function($scope) {
+    if (greeting) {
+      vm.messages.push({content:(greeting.saying), emoji:$sce.trustAsHtml(greeting.emoji),class:'bot'});
+      $ionicScrollDelegate.scrollBottom(true)
+    } else {
+      var botMessage = responseFactory();
 
-})
+      vm.messages.push({content:(botMessage.saying), emoji:$sce.trustAsHtml(botMessage.emoji),class:'bot'});
+      $ionicScrollDelegate.scrollBottom(true)
+    }
 
-.controller('signupCtrl', function($scope) {
+  }
 
-})
-
-.controller('loginCtrl', function($scope) {
 
 })

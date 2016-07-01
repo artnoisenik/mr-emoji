@@ -21,13 +21,13 @@ h1.welcome {
 .messages li {
 	display:block;
 	clear:both;
-	max-width:50%;
 	margin:1rem 1rem 1rem 1rem;
 	padding:0;
 }
 
-.messages li:nth-child(odd) {
-	float:right;
+.user {
+	float:right !important;
+	max-width:50% !important;
 }
 
 .messages p {
@@ -39,7 +39,8 @@ h1.welcome {
 	font-size:.875rem;
 }
 
-.messages li:nth-child(even) p {
-	background:rgba(0,0,0,0.54);
-  float: left;
+.bot {
+	background:rgba(0,0,0,0.54) !important;
+  float: left !important;
+	max-width:50% !important;
 }
