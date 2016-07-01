@@ -1,4 +1,4 @@
-[portfolio](philskaggs.net)
+[portfolio](http://philskaggs.net)
 
 Ionic App Base
 =====================
