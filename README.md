@@ -1,10 +1,4 @@
-#Rubber Duck bot app
-
-###chat view
-<img src="./screencaps/chat.png" width="250x") />
-
-###diary view
-<img src="./screencaps/diary.png" width="250x">
+[portfolio](http://philskaggs.net)
 
 Ionic App Base
 =====================
