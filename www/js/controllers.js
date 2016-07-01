@@ -17,8 +17,7 @@ angular.module('app.controllers', [])
   function addMessageToList(message){
     vm.messages.push({content:$sce.trustAsHtml(message),class:'user'});
     $ionicScrollDelegate.scrollBottom(true);
-    reviewMessageHello(message);
-    // reviewMessageBye(message);
+    reviewMessage(message);
   }
 
   //bot says hello
@@ -44,7 +43,11 @@ angular.module('app.controllers', [])
     "end",
   ];
 
-  function reviewMessageHello(text) {
+  var countHi = 0;
+  var countBye = 0;
+
+  function reviewMessage(text) {
+
     var greetings = false;
 
     text=text.toLowerCase();
@@ -85,14 +88,34 @@ angular.module('app.controllers', [])
   }
 
   function botHello() {
-    var hi = helloService();
-    console.log("HI",hi);
-    return hi;
+    console.log('COUNT',countHi);
+    if(countHi===0) {
+      countHi++;
+      var hi = helloService();
+      return hi;
+    } else  {
+      var  cool = {
+        saying: "???",
+        emoji: "&#128566;"
+      }
+      return cool;
+    }
+
   }
 
   function botBye() {
-    var bye = byeService();
-    return bye;
+    if(countBye===0){
+      countBye++;
+      var bye = byeService();
+      return bye;
+    } else {
+      var  cool = {
+        saying: "???",
+        emoji: "&#128566;"
+      }
+      return cool;
+    }
+
   }
 
   //bot posts to message list
