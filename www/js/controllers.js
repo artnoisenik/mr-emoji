@@ -15,6 +15,19 @@ angular.module('app.controllers', [])
     botMessageToList();
   }
 
+  function reviewMessage(message) {
+    var text=message.toLowerCase();
+    var text=message.replace(/@#\$%\^&\*\(\)_\+=~`\{\[\}\]\|:;<>\/\\\t/g, ' ');
+    var text=message.replace(/\s+-+\s+/g, '.');
+    var text=message.replace(/\s*[,\.\?!;]+\s*/g, '.');
+    var text=message.replace(/\s*\bbut\b\s*/g, '.');
+    var text=message.replace(/\s{2,}/g, ' ');
+
+    console.log(text);
+  }
+
+
+
   function botMessageToList() {
     var time = new Date();
     var botMessage = responseFactory();
