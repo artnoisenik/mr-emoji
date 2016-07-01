@@ -13,17 +13,32 @@ angular.module('app.controllers', [])
   function addMessageToList(message){
     vm.messages.push({content:$sce.trustAsHtml(message)});
     botMessageToList();
+    reviewMessage(message);
   }
 
-  function reviewMessage(message) {
-    var text=message.toLowerCase();
-    var text=message.replace(/@#\$%\^&\*\(\)_\+=~`\{\[\}\]\|:;<>\/\\\t/g, ' ');
-    var text=message.replace(/\s+-+\s+/g, '.');
-    var text=message.replace(/\s*[,\.\?!;]+\s*/g, '.');
-    var text=message.replace(/\s*\bbut\b\s*/g, '.');
-    var text=message.replace(/\s{2,}/g, ' ');
+  function reviewMessage(text) {
+    text=text.toLowerCase();
+  	text=text.replace(/@#\$%\^&\*\(\)_\+=~`\{\[\}\]\|:;<>\/\\\t/g, ' ');
+  	text=text.replace(/\s+-+\s+/g, '.');
+  	text=text.replace(/\s*[,\.\?!;]+\s*/g, '.');
+  	text=text.replace(/\s*\bbut\b\s*/g, '.');
+  	text=text.replace(/\s{2,}/g, ' ');
 
     console.log(text);
+
+    var parts=text.split('.');
+    for (var i=0; i<parts.length; i++) {
+      var part=parts[i];
+      if (part!='') {
+        // check for quit expression
+        for (var q=0; q<elizaQuits.length; q++) {
+          if (elizaQuits[q]==part) {
+            this.quit=true;
+            return this.getFinal();
+          }
+        }
+      }
+    }
   }
 
 
@@ -31,7 +46,6 @@ angular.module('app.controllers', [])
   function botMessageToList() {
     var time = new Date();
     var botMessage = responseFactory();
-    console.log(botMessage);
     vm.messages.push({content:(botMessage.saying), emoji:$sce.trustAsHtml(botMessage.emoji)});
     $ionicScrollDelegate.scrollBottom(true)
   }
