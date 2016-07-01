@@ -3,15 +3,40 @@ angular.module('app.services', [])
 .factory('responseFactory', [function($http){
 
 
-  var test = function() {
-    var cool = {
+  var botSayings = [
+    {
       saying: "tell me more",
       emoji: "&#x1F914;"
-    }
-    return cool;
+    },
+    {
+      saying: "",
+      emoji: "&#128533;"
+    },
+    {
+      saying: "",
+      emoji: "&#128527;"
+    },
+    {
+      saying: "&#128586;",
+      emoji: "&#128526;"
+    },
+    {
+      saying: "Really?",
+      emoji: "&#128579;"
+    },
+    {
+      saying: "Cool",
+      emoji: "&#128524;"
+    },
+
+  ]
+
+
+  var getSaying = function() {
+    return botSayings[Math.floor(Math.random()*botSayings.length)];
   }
 
-  return (test);
+  return (getSaying);
 
 }])
 

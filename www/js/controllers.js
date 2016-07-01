@@ -59,7 +59,7 @@ angular.module('app.controllers', [])
     text=text.replace(/\s*\bbut\b\s*/g, '.');
     text=text.replace(/\s{2,}/g, ' ');
 
-    var parts=text.split('.').join(' ').split(' ');
+    var parts=text.split('.');
 
     for (var i=0; i<parts.length; i++) {
       var part=parts[i];
@@ -68,7 +68,6 @@ angular.module('app.controllers', [])
       } else {
         part = parts[i];
       }
-      console.log('PPARRT',part);
       var lastPart = parts[parts.length-1];
         for (var q=0; q<botStarts.length; q++) {
           var lastBotStart = botStarts[botStarts.length-1];
@@ -82,16 +81,20 @@ angular.module('app.controllers', [])
 
         for (var z=0; z<botEnds.length; z++) {
           if (botEnds[z]==part) {
+            firstMessage++;
             greetings = true;
             var bye = botBye();
             botMessageToList(bye);
-            break;
-          } else if(lastPart!=lastBotStart && greetings === false) {
-            firstMessage++;
-            botMessageToList();
-            break;
           }
         }
+
+        if(greetings===false) {
+          firstMessage++;
+          botMessageToList();
+          break;
+        }
+
+
     }
   }
 
@@ -129,7 +132,6 @@ angular.module('app.controllers', [])
   //bot posts to message list
 
   function botMessageToList(greeting) {
-    console.log('GREETING',greeting);
 
     if (greeting) {
       vm.messages.push({content:(greeting.saying), emoji:$sce.trustAsHtml(greeting.emoji),class:'bot'});
