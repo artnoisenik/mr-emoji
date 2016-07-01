@@ -92,7 +92,6 @@ angular.module('app.controllers', [])
             break;
           }
         }
-
     }
   }
 
@@ -113,7 +112,7 @@ angular.module('app.controllers', [])
   }
 
   function botBye() {
-    if(countBye===0 && firstMessage===0){
+    if(countBye===0){
       countBye++;
       var bye = byeService();
       return bye;
@@ -136,7 +135,6 @@ angular.module('app.controllers', [])
       vm.messages.push({content:(greeting.saying), emoji:$sce.trustAsHtml(greeting.emoji),class:'bot'});
       $ionicScrollDelegate.scrollBottom(true)
     } else {
-      console.log('COOOL');
 
       var botMessage = responseFactory();
 
@@ -145,6 +143,5 @@ angular.module('app.controllers', [])
     }
 
   }
-
 
 })

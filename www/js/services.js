@@ -1,6 +1,8 @@
 angular.module('app.services', [])
 
-.factory('responseFactory', [function(){
+.factory('responseFactory', [function($http){
+
+
   var test = function() {
     var cool = {
       saying: "tell me more",

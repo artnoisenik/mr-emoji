@@ -17,30 +17,6 @@ angular.module('app.routes', [])
     controllerAs: 'vm'
   })
 
-  .state('diary', {
-    url: '/diary',
-    templateUrl: 'templates/diary.html',
-    controller: 'diaryCtrl'
-  })
-
-  .state('tabsController', {
-    url: '/tabs',
-    templateUrl: 'templates/tabsController.html',
-    abstract:true
-  })
-
-  .state('signup', {
-    url: '/signup',
-    templateUrl: 'templates/signup.html',
-    controller: 'signupCtrl'
-  })
-
-  .state('login', {
-    url: '/login',
-    templateUrl: 'templates/login.html',
-    controller: 'loginCtrl'
-  })
-
 $urlRouterProvider.otherwise('/chat')
 
 
