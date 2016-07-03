@@ -1,6 +1,6 @@
 angular.module('app.controllers', [])
 
-.controller('chatCtrl', function($ionicScrollDelegate,responseFactory,helloService,byeService,$sce,$http) {
+.controller('chatCtrl', function($ionicScrollDelegate,neutralSayingService,helloService,byeService,$sce,$http) {
 
   var vm=this;
 
@@ -95,8 +95,9 @@ angular.module('app.controllers', [])
             firstMessage++;
             var sentiment = response.data.sentiment;
               // botMessageSentimentToList(response);
-              botMessageToList();
+              // botMessageToList();
             console.log('SUCCESS',sentiment);
+            botMessageSentiment(sentiment)
           }, function errorCallback(response) {
             console.log('ERRRRR',response);
           });
@@ -143,13 +144,16 @@ angular.module('app.controllers', [])
     } else if (sentiment=== 'negative') {
       console.log('NEGATIVE!');
     } else if (sentiment === 'neutral') {
+
       console.log('nuetrallll....');
+      var botMessage = neutralSayingService();
+
+      console.log('BOT MESSAG!!!');
+
+      vm.messages.push({content:(botMessage.saying), emoji:$sce.trustAsHtml(botMessage.emoji),class:'bot'});
+      $ionicScrollDelegate.scrollBottom(true)
     }
 
-    var botMessage = responseFactory();
-
-    vm.messages.push({content:(botMessage.saying), emoji:$sce.trustAsHtml(botMessage.emoji),class:'bot'});
-    $ionicScrollDelegate.scrollBottom(true)
   }
 
   //bot posts to message list
