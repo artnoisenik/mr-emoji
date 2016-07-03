@@ -50,17 +50,6 @@ angular.module('app.controllers', [])
   var countBye = 0;
 
   function reviewMessage(text) {
-
-
-    $http.get('http://localhost:3000/api/v1/tone/'+text)
-    .then(function successCallback(response) {
-      console.log('BUCK');
-      console.log('SUCCESS',response);
-    }, function errorCallback(response) {
-      console.log('FUCK');
-      console.log('ERRRRR',response);
-    });
-
     var greetings = false;
 
     text=text.toLowerCase();
@@ -98,6 +87,21 @@ angular.module('app.controllers', [])
             botMessageToList(bye);
           }
         }
+
+        if(greetings===false){
+
+          $http.get('http://localhost:3000/api/v1/tone/'+text)
+          .then(function successCallback(response) {
+            firstMessage++;
+            var sentiment = response.data.sentiment;
+              // botMessageSentimentToList(response);
+            console.log('SUCCESS',sentiment);
+          }, function errorCallback(response) {
+            console.log('ERRRRR',response);
+          });
+
+        }
+
 
         if(greetings===false) {
           firstMessage++;
