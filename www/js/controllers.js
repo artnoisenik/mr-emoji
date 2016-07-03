@@ -1,6 +1,7 @@
 angular.module('app.controllers', [])
 
 .controller('chatCtrl', function($ionicScrollDelegate,responseFactory,helloService,byeService,$sce) {
+
   var vm=this;
 
 	vm.messages=[];

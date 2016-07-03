@@ -1,7 +1,14 @@
+
 angular.module('app.services', [])
 
-.factory('responseFactory', [function($http){
+.factory('responseFactory', ['$http', function($http){
 
+  $http.get('http://localhost:3000/watson/english')
+  .then(function successCallback(response) {
+    console.log('SUCCESS',response);
+  }, function errorCallback(response) {
+    console.log('ERRRRR',response);
+  });
 
   var botSayings = [
     {
