@@ -3,7 +3,7 @@ angular.module('app.services', [])
 
 .factory('responseFactory', ['$http', function($http){
 
-  $http.get('http://localhost:3000/watson/english')
+  $http.get('http://localhost:3000/api/v1/tone')
   .then(function successCallback(response) {
     console.log('SUCCESS',response);
   }, function errorCallback(response) {
