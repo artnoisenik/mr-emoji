@@ -101,11 +101,8 @@ angular.module('app.controllers', [])
         var sentiment = response.data.sentiment;
           // botMessageSentimentToList(response);
           // botMessageToList();
-        console.log('RESSSSS',response);
-        console.log('SUCCESS',userText);
         botMessageSentiment(sentiment);
       }, function errorCallback(response) {
-        console.log('ERRRRR',response);
       });
 
     }
@@ -144,7 +141,6 @@ angular.module('app.controllers', [])
 
   function botMessageSentiment(sentiment){
     if(sentiment=== 'positive') {
-      console.log('POSITIVE!');
       var botMessage = positiveSayingService();
 
       vm.messages.push({content:(botMessage.saying), emoji:$sce.trustAsHtml(botMessage.emoji),class:'bot'});
