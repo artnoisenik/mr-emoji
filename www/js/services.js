@@ -35,6 +35,10 @@ angular.module('app.services', [])
     {
       saying: "",
       emoji: "&#128588; &#128588; &#128588; &#128523;"
+    },
+    {
+      saying: "...!",
+      saying: "&#128579; &#128579; &#128579;"
     }
 
   ]
@@ -51,7 +55,7 @@ angular.module('app.services', [])
   var botSayings = [
     {
       saying: "oh...",
-      emoji: "&#x1F914;"
+      emoji: "&#9760;	&#128511;"
     },
     {
       saying: "i see",
@@ -75,7 +79,11 @@ angular.module('app.services', [])
     },
     {
       saying:"",
-      emoji:"&#128577; &#1F916;"
+      emoji:"&#128577; &#129302;"
+    },
+    {
+      saying: "...",
+      emoji: "&#128580; &#128579; &#128580; &#128580;"
     }
 
   ]
@@ -92,7 +100,7 @@ angular.module('app.services', [])
   var botSayings = [
     {
       saying: "tell me more",
-      emoji: "&#x1F914;"
+      emoji: "&#128579;"
     },
     {
       saying: "hm...",
@@ -120,7 +128,11 @@ angular.module('app.services', [])
     },
     {
       saying:"",
-      emoji: "&#1F910; &#1F910; &#1F910;"
+      emoji: "&#129302; &#129302; &#128511; &#129302;"
+    },
+    {
+      saying:"",
+      emoji: "&#128373;	&#128373;"
     }
 
   ]
