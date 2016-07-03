@@ -95,7 +95,7 @@ angular.module('app.controllers', [])
 
     if(greetings===false){
 
-      $http.get('http://localhost:3000/api/v1/tone/'+userText)
+      $http.get('https://mremojibot.herokuapp.com/api/v1/tone/'+userText)
       .then(function successCallback(response) {
         firstMessage++;
         var sentiment = response.data.sentiment;
@@ -109,7 +109,6 @@ angular.module('app.controllers', [])
   }
 
   function botHello() {
-    console.log('COUNT',countHi);
     if(countHi===0 && firstMessage===0) {
       countHi++;
       var hi = helloService();
@@ -146,13 +145,11 @@ angular.module('app.controllers', [])
       vm.messages.push({content:(botMessage.saying), emoji:$sce.trustAsHtml(botMessage.emoji),class:'bot'});
       $ionicScrollDelegate.scrollBottom(true)
     } else if (sentiment=== 'negative') {
-      console.log('NEGATIVE!');
       var botMessage = negativeSayingService();
 
       vm.messages.push({content:(botMessage.saying), emoji:$sce.trustAsHtml(botMessage.emoji),class:'bot'});
       $ionicScrollDelegate.scrollBottom(true)
     } else if (sentiment === 'neutral') {
-      console.log('nuetrallll....');
       var botMessage = neutralSayingService();
 
       vm.messages.push({content:(botMessage.saying), emoji:$sce.trustAsHtml(botMessage.emoji),class:'bot'});
