@@ -56,8 +56,6 @@ angular.module('app.controllers', [])
 
     $timeout(function () {
 
-
-
           var greetings = false;
 
           text=userText.toLowerCase();
