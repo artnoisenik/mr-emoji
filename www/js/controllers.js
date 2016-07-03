@@ -1,6 +1,6 @@
 angular.module('app.controllers', [])
 
-.controller('chatCtrl', function($ionicScrollDelegate,positiveSayingService,negativeSayingService,neutralSayingService,helloService,byeService,$sce,$http) {
+.controller('chatCtrl', function($ionicScrollDelegate,positiveSayingService,negativeSayingService,neutralSayingService,helloService,byeService,$sce,$http,$timeout) {
 
   var vm=this;
 
@@ -53,59 +53,64 @@ angular.module('app.controllers', [])
   var countBye = 0;
 
   function reviewMessage(userText) {
-    var greetings = false;
 
-    text=userText.toLowerCase();
-    text=text.replace(/@#\$%\^&\*\(\)_\+=~`\{\[\}\]\|:;<>\/\\\t/g, ' ');
-    text=text.replace(/\s+-+\s+/g, '.');
-    text=text.replace(/\s*[,\.\?!;]+\s*/g, '.');
-    text=text.replace(/\s*\bbut\b\s*/g, '.');
-    text=text.replace(/\s{2,}/g, ' ');
+    $timeout(function () {
 
-    var parts=text.split('.');
+          var greetings = false;
 
-    for (var i=0; i<parts.length; i++) {
-      var part=parts[i];
-      if(part==='') {
-        break;
-      } else {
-        part = parts[i];
-      }
-      var lastPart = parts[parts.length-1];
-        for (var q=0; q<botStarts.length; q++) {
-          var lastBotStart = botStarts[botStarts.length-1];
-          if (botStarts[q]==part) {
-            greetings = true;
-            var hello = botHello();
-            botMessageToList(hello);
-            break;
+          text=userText.toLowerCase();
+          text=text.replace(/@#\$%\^&\*\(\)_\+=~`\{\[\}\]\|:;<>\/\\\t/g, ' ');
+          text=text.replace(/\s+-+\s+/g, '.');
+          text=text.replace(/\s*[,\.\?!;]+\s*/g, '.');
+          text=text.replace(/\s*\bbut\b\s*/g, '.');
+          text=text.replace(/\s{2,}/g, ' ');
+
+          var parts=text.split('.');
+
+          for (var i=0; i<parts.length; i++) {
+            var part=parts[i];
+            if(part==='') {
+              break;
+            } else {
+              part = parts[i];
+            }
+            var lastPart = parts[parts.length-1];
+              for (var q=0; q<botStarts.length; q++) {
+                var lastBotStart = botStarts[botStarts.length-1];
+                if (botStarts[q]==part) {
+                  greetings = true;
+                  var hello = botHello();
+                  botMessageToList(hello);
+                  break;
+                }
+              }
+
+              for (var z=0; z<botEnds.length; z++) {
+                if (botEnds[z]==part) {
+                  firstMessage++;
+                  greetings = true;
+                  var bye = botBye();
+                  botMessageToList(bye);
+                }
+              }
+
           }
-        }
 
-        for (var z=0; z<botEnds.length; z++) {
-          if (botEnds[z]==part) {
-            firstMessage++;
-            greetings = true;
-            var bye = botBye();
-            botMessageToList(bye);
+          if(greetings===false){
+
+            $http.get('https://mremojibot.herokuapp.com/api/v1/tone/'+userText)
+            .then(function successCallback(response) {
+              firstMessage++;
+              var sentiment = response.data.sentiment;
+                // botMessageSentimentToList(response);
+                // botMessageToList();
+              botMessageSentiment(sentiment);
+            }, function errorCallback(response) {
+              console.log('ERR response',response);
+            });
           }
-        }
+  }, 1000);
 
-    }
-
-    if(greetings===false){
-
-      $http.get('https://mremojibot.herokuapp.com/api/v1/tone/'+userText)
-      .then(function successCallback(response) {
-        firstMessage++;
-        var sentiment = response.data.sentiment;
-          // botMessageSentimentToList(response);
-          // botMessageToList();
-        botMessageSentiment(sentiment);
-      }, function errorCallback(response) {
-      });
-
-    }
   }
 
   function botHello() {
