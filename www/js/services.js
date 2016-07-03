@@ -5,8 +5,10 @@ angular.module('app.services', [])
 
   $http.get('http://localhost:3000/api/v1/tone')
   .then(function successCallback(response) {
+    console.log('BUCK');
     console.log('SUCCESS',response);
   }, function errorCallback(response) {
+    console.log('FUCK');
     console.log('ERRRRR',response);
   });
 
