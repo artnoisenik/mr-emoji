@@ -5,6 +5,88 @@ angular.module('app.services', [])
 
 }])
 
+.service('positiveSayingService',[function(){
+
+  var botSayings = [
+    {
+      saying: "Oh yeah!?",
+      emoji: "&#x1F914;"
+    },
+    {
+      saying: "Wow!",
+      emoji: "&#128525;"
+    },
+    {
+      saying: "Yay yea yea",
+      emoji: "&#128527;"
+    },
+    {
+      saying: "Lol",
+      emoji: "&#128516; &#128526;"
+    },
+    {
+      saying: "fun!",
+      emoji: "&#128579;"
+    },
+    {
+      saying: "!!!",
+      emoji: "&#128518; &#128518;"
+    },
+    {
+      saying: "",
+      emoji: "&#128588; &#128588; &#128588; &#128523;"
+    }
+
+  ]
+
+  var getSaying = function() {
+    return botSayings[Math.floor(Math.random()*botSayings.length)];
+  }
+
+  return (getSaying);
+}])
+
+.service('negativeSayingService',[function(){
+
+  var botSayings = [
+    {
+      saying: "oh...",
+      emoji: "&#x1F914;"
+    },
+    {
+      saying: "i see",
+      emoji: "&#128533;"
+    },
+    {
+      saying: "really?",
+      emoji: "&#128576; &#128520;"
+    },
+    {
+      saying: "Whoa",
+      emoji: "&#128534; &#128526;"
+    },
+    {
+      saying: "ugh",
+      emoji: "&#128579; &#128548;"
+    },
+    {
+      saying: "oy",
+      emoji: "&#128524; &#128563;"
+    },
+    {
+      saying:"",
+      emoji:"&#128577; &#1F916;"
+    }
+
+  ]
+
+  var getSaying = function() {
+    return botSayings[Math.floor(Math.random()*botSayings.length)];
+  }
+
+  return (getSaying);
+}])
+
 .service('neutralSayingService',[function(){
 
   var botSayings = [
@@ -13,12 +95,12 @@ angular.module('app.services', [])
       emoji: "&#x1F914;"
     },
     {
-      saying: "",
+      saying: "hm...",
       emoji: "&#128533;"
     },
     {
       saying: "",
-      emoji: "&#128527;"
+      emoji: "&#128528; &#128528;"
     },
     {
       saying: "",
@@ -30,8 +112,16 @@ angular.module('app.services', [])
     },
     {
       saying: "Cool",
-      emoji: "&#128524;"
+      emoji: "&#128529;"
     },
+    {
+      saying: "",
+      emoji: "&#128564;"
+    },
+    {
+      saying:"",
+      emoji: "&#1F910; &#1F910; &#1F910;"
+    }
 
   ]
 
