@@ -1,16 +1,11 @@
 
 angular.module('app.services', [])
 
-.factory('responseFactory', ['$http', function($http){
+.factory('responseFactory', [function(){
 
-  // $http.get('http://localhost:3000/api/v1/tone')
-  // .then(function successCallback(response) {
-  //   console.log('BUCK');
-  //   console.log('SUCCESS',response);
-  // }, function errorCallback(response) {
-  //   console.log('FUCK');
-  //   console.log('ERRRRR',response);
-  // });
+}])
+
+.service('neutralSayingService',[function(){
 
   var botSayings = [
     {
@@ -40,13 +35,11 @@ angular.module('app.services', [])
 
   ]
 
-
   var getSaying = function() {
     return botSayings[Math.floor(Math.random()*botSayings.length)];
   }
 
   return (getSaying);
-
 }])
 
 .service('helloService', [function(){
