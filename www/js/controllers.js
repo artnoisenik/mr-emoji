@@ -1,6 +1,6 @@
 angular.module('app.controllers', [])
 
-.controller('chatCtrl', function($ionicScrollDelegate,responseFactory,helloService,byeService,$sce) {
+.controller('chatCtrl', function($ionicScrollDelegate,responseFactory,helloService,byeService,$sce,$http) {
 
   var vm=this;
 
@@ -50,6 +50,16 @@ angular.module('app.controllers', [])
   var countBye = 0;
 
   function reviewMessage(text) {
+
+
+    $http.get('http://localhost:3000/api/v1/tone/'+text)
+    .then(function successCallback(response) {
+      console.log('BUCK');
+      console.log('SUCCESS',response);
+    }, function errorCallback(response) {
+      console.log('FUCK');
+      console.log('ERRRRR',response);
+    });
 
     var greetings = false;
 
