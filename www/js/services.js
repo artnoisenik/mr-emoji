@@ -26,8 +26,8 @@ angular.module('app.services', [])
       emoji: "&#128527;"
     },
     {
-      saying: "&#128586;",
-      emoji: "&#128526;"
+      saying: "",
+      emoji: "&#128586; &#128526;"
     },
     {
       saying: "Really?",

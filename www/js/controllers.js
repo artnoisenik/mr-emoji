@@ -95,20 +95,13 @@ angular.module('app.controllers', [])
             firstMessage++;
             var sentiment = response.data.sentiment;
               // botMessageSentimentToList(response);
+              botMessageToList();
             console.log('SUCCESS',sentiment);
           }, function errorCallback(response) {
             console.log('ERRRRR',response);
           });
 
         }
-
-
-        if(greetings===false) {
-          firstMessage++;
-          botMessageToList();
-          break;
-        }
-
 
     }
   }
@@ -144,6 +137,21 @@ angular.module('app.controllers', [])
 
   }
 
+  function botMessageSentiment(sentiment){
+    if(sentiment=== 'positive') {
+      console.log('POSITIVE!');
+    } else if (sentiment=== 'negative') {
+      console.log('NEGATIVE!');
+    } else if (sentiment === 'neutral') {
+      console.log('nuetrallll....');
+    }
+
+    var botMessage = responseFactory();
+
+    vm.messages.push({content:(botMessage.saying), emoji:$sce.trustAsHtml(botMessage.emoji),class:'bot'});
+    $ionicScrollDelegate.scrollBottom(true)
+  }
+
   //bot posts to message list
 
   function botMessageToList(greeting) {
@@ -151,14 +159,7 @@ angular.module('app.controllers', [])
     if (greeting) {
       vm.messages.push({content:(greeting.saying), emoji:$sce.trustAsHtml(greeting.emoji),class:'bot'});
       $ionicScrollDelegate.scrollBottom(true)
-    } else {
-
-      var botMessage = responseFactory();
-
-      vm.messages.push({content:(botMessage.saying), emoji:$sce.trustAsHtml(botMessage.emoji),class:'bot'});
-      $ionicScrollDelegate.scrollBottom(true)
     }
-
   }
 
 })
