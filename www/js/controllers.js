@@ -1,6 +1,6 @@
 angular.module('app.controllers', [])
 
-.controller('chatCtrl', function($ionicScrollDelegate,neutralSayingService,helloService,byeService,$sce,$http) {
+.controller('chatCtrl', function($ionicScrollDelegate,positiveSayingService,negativeSayingService,neutralSayingService,helloService,byeService,$sce,$http) {
 
   var vm=this;
 
@@ -35,6 +35,9 @@ angular.module('app.controllers', [])
   ];
 
   var botEnds = [
+    "see ya later",
+    "seeya",
+    "bye bye",
     "bye",
     "later",
     "see ya",
@@ -49,10 +52,10 @@ angular.module('app.controllers', [])
   var countHi = 0;
   var countBye = 0;
 
-  function reviewMessage(text) {
+  function reviewMessage(userText) {
     var greetings = false;
 
-    text=text.toLowerCase();
+    text=userText.toLowerCase();
     text=text.replace(/@#\$%\^&\*\(\)_\+=~`\{\[\}\]\|:;<>\/\\\t/g, ' ');
     text=text.replace(/\s+-+\s+/g, '.');
     text=text.replace(/\s*[,\.\?!;]+\s*/g, '.');
@@ -88,21 +91,22 @@ angular.module('app.controllers', [])
           }
         }
 
-        if(greetings===false){
+    }
 
-          $http.get('http://localhost:3000/api/v1/tone/'+text)
-          .then(function successCallback(response) {
-            firstMessage++;
-            var sentiment = response.data.sentiment;
-              // botMessageSentimentToList(response);
-              // botMessageToList();
-            console.log('SUCCESS',sentiment);
-            botMessageSentiment(sentiment)
-          }, function errorCallback(response) {
-            console.log('ERRRRR',response);
-          });
+    if(greetings===false){
 
-        }
+      $http.get('http://localhost:3000/api/v1/tone/'+userText)
+      .then(function successCallback(response) {
+        firstMessage++;
+        var sentiment = response.data.sentiment;
+          // botMessageSentimentToList(response);
+          // botMessageToList();
+        console.log('RESSSSS',response);
+        console.log('SUCCESS',userText);
+        botMessageSentiment(sentiment);
+      }, function errorCallback(response) {
+        console.log('ERRRRR',response);
+      });
 
     }
   }
@@ -141,14 +145,19 @@ angular.module('app.controllers', [])
   function botMessageSentiment(sentiment){
     if(sentiment=== 'positive') {
       console.log('POSITIVE!');
+      var botMessage = positiveSayingService();
+
+      vm.messages.push({content:(botMessage.saying), emoji:$sce.trustAsHtml(botMessage.emoji),class:'bot'});
+      $ionicScrollDelegate.scrollBottom(true)
     } else if (sentiment=== 'negative') {
       console.log('NEGATIVE!');
-    } else if (sentiment === 'neutral') {
+      var botMessage = negativeSayingService();
 
+      vm.messages.push({content:(botMessage.saying), emoji:$sce.trustAsHtml(botMessage.emoji),class:'bot'});
+      $ionicScrollDelegate.scrollBottom(true)
+    } else if (sentiment === 'neutral') {
       console.log('nuetrallll....');
       var botMessage = neutralSayingService();
-
-      console.log('BOT MESSAG!!!');
 
       vm.messages.push({content:(botMessage.saying), emoji:$sce.trustAsHtml(botMessage.emoji),class:'bot'});
       $ionicScrollDelegate.scrollBottom(true)
