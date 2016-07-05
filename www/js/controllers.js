@@ -59,7 +59,6 @@ angular.module('app.controllers', [])
     $scope.show = true;
 
     $timeout(function () {
-      // $scope.show = false;
 
           var greetings = false;
 
