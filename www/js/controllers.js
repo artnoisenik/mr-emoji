@@ -1,6 +1,6 @@
 angular.module('app.controllers', [])
 
-.controller('chatCtrl', function($ionicScrollDelegate,positiveSayingService,negativeSayingService,neutralSayingService,helloService,byeService,$sce,$http,$timeout) {
+.controller('chatCtrl', function($ionicScrollDelegate,positiveSayingService,negativeSayingService,neutralSayingService,helloService,byeService,$sce,$http,$timeout,$scope) {
 
   var vm=this;
 
@@ -52,9 +52,14 @@ angular.module('app.controllers', [])
   var countHi = 0;
   var countBye = 0;
 
+  $scope.show = false;
+
   function reviewMessage(userText) {
 
+    $scope.show = true;
+
     $timeout(function () {
+      // $scope.show = false;
 
           var greetings = false;
 
@@ -102,18 +107,19 @@ angular.module('app.controllers', [])
             .then(function successCallback(response) {
               firstMessage++;
               var sentiment = response.data.sentiment;
-                // botMessageSentimentToList(response);
-                // botMessageToList();
+
               botMessageSentiment(sentiment);
             }, function errorCallback(response) {
               console.log('ERR response',response);
             });
           }
-  }, 1000);
+  }, 1500);
 
   }
 
   function botHello() {
+    $scope.show = false;
+
     if(countHi===0 && firstMessage===0) {
       countHi++;
       var hi = helloService();
@@ -129,6 +135,8 @@ angular.module('app.controllers', [])
   }
 
   function botBye() {
+    $scope.show = false;
+
     if(countBye===0){
       countBye++;
       var bye = byeService();
@@ -144,6 +152,8 @@ angular.module('app.controllers', [])
   }
 
   function botMessageSentiment(sentiment){
+    $scope.show = false;
+
     if(sentiment=== 'positive') {
       var botMessage = positiveSayingService();
 

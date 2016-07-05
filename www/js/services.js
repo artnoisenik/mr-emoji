@@ -52,10 +52,6 @@ angular.module('app.services', [])
       saying: "Joy!",
       emoji: "&#127791; &#127790;	&#127870;"
     },
-    {
-      saying: "...!",
-      saying: "&#128579; &#128579; &#128579;"
-    }
 
   ]
 

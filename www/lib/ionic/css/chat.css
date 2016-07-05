@@ -44,3 +44,12 @@ h1.welcome {
   float: left !important;
 	max-width:50% !important;
 }
+
+@-webkit-keyframes spinner {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(359deg); }
+}
+.jello.ng-animate { -webkit-animation: none 0s; }
+.jello {
+    -webkit-animation: spinner 2s infinite linear;
+}
