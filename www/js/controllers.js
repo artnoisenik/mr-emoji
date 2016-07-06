@@ -112,7 +112,7 @@ angular.module('app.controllers', [])
               console.log('ERR response',response);
             });
           }
-  }, 800);
+  }, 500);
 
   }
 
